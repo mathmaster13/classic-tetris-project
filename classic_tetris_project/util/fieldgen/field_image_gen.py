@@ -22,6 +22,7 @@ class FieldImageGenerator(object):
         self.level = simulation.level % 256
         self.height = simulation.height
         self.sequence = simulation.sequence
+        self.console_type = simulation.console_type
 
     def generate_image(self):
         bc = BaseCanvas(self.TEMPLATE_MANAGER.template)
@@ -49,7 +50,7 @@ class FieldImageGenerator(object):
         lg.draw_level(canvas.img, self.level)
 
     def simulate_game(self, canvas):
-        gravity_frames = GravityFrames.get_gravityframes(self.level)
+        gravity_frames = GravityFrames.get_gravityframes(self.level, self.console_type)
         column_dir = Aesthetics.get_piece_shift_direction(self.sequence)
         seq_length = InputGenerator.input_length(self.sequence)
         anim_length = seq_length + 3 * gravity_frames
