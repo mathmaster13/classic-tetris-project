@@ -54,9 +54,10 @@ class GravityFrames(object):
     ]
 
     @staticmethod
-    def get_gravityframes(level):
+    def get_gravityframes(level, console_type="ntsc"):
         result = 1
         level %= 256
-        if level < 29:
+        LEVELS = LEVELS_PAL if console_type == "pal" else LEVELS_NTSC
+        if level < len(LEVELS):
             result = GravityFrames.LEVELS[level]
         return result
