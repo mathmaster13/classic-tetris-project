@@ -31,7 +31,7 @@ class HzCommand(Command):
     """
     aliases = ("hz", "hydrant")
     supported_platforms = (Platform.DISCORD,) # TODO: twitch support
-    usage = "hz <level> <height> <taps>"
+    usage = "hz <level> <height> <taps> [type=NTSC]"
     section = DocSection.UTIL
 
     def execute(self, level, height, taps, console_type="ntsc"):
