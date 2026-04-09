@@ -14,10 +14,13 @@ class HzSimulation:
     VERSION = 2
     IMAGE_CACHE = FileCache("hz")
 
-    def __init__(self, level, height, taps=None, sequence=None):
-
+    def __init__(self, level, height, taps=None, sequence=None, console_type="ntsc"):
         self.level = int(level)
         self.height = int(height)
+        self.console_type = console_type.lower()
+        if self.console_type != "ntsc" and self.console_type != "pal":
+            raise RuntimeError("Invalid console type: must be NTSC or PAL.")
+        
         if taps is not None:
             self.taps = int(taps)
             self.frames = self.generate_numframes()
@@ -32,7 +35,7 @@ class HzSimulation:
             raise RuntimeError("taps or sequence must be provided")
 
     def generate_numframes(self):
-        gravity = GravityFrames.get_gravityframes(self.level)
+        gravity = GravityFrames.get_gravityframes(self.level, self.console_type)
         return gravity * (19 - self.height)
 
     def generate_sequence(self, num_taps):
