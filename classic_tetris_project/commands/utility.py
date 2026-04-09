@@ -52,12 +52,13 @@ class HzCommand(Command):
             raise CommandException(str(e))
                  
         rate = hz.hertz()
-        msg = "{tps} taps {hght} high on level {lvl}:\n{mini} - {maxi} Hz\n".format(
+        msg = "{tps} taps {hght} high on level {lvl} ({console_type}):\n{mini} - {maxi} Hz\n".format(
             tps=hz.taps,
             hght=hz.height,
             lvl=hz.level,
             mini=rate[0],
-            maxi=rate[1]
+            maxi=rate[1],
+            console_type=console_type.upper(),
             )
 
         # Eagerly cache the image instead of letting the web server handle it lazily
