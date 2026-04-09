@@ -34,16 +34,20 @@ class HzCommand(Command):
     usage = "hz <level> <height> <taps>"
     section = DocSection.UTIL
 
-    def execute(self, level, height, taps):
+    def execute(self, level, height, taps, console_type="ntsc"):
         try:
             level = int(level)
             height = int(height)
             taps = int(taps)
         except ValueError:
             raise CommandException(send_usage = True)
+
+        console_type = console_type.lower()
+        if console_type != "ntsc" and console_type != "pal":
+            raise CommandException("Invalid console type - must be NTSC or PAL (default NTSC)")
         
         try:
-            hz = HzSimulation(level,height,taps)
+            hz = HzSimulation(level,height,taps,console_type)
         except ValueError as e:
             raise CommandException(str(e))
                  
