@@ -20,6 +20,8 @@ class HzSimulation:
         self.console_type = console_type.lower()
         if self.console_type != "ntsc" and self.console_type != "pal":
             raise RuntimeError("Invalid console type: must be NTSC or PAL.")
+
+        self.framerate = 50 if console_type == "pal" else 60
         
         if taps is not None:
             self.taps = int(taps)
@@ -61,6 +63,7 @@ class HzSimulation:
         return self.input_seq(self.frames, self.taps)
 
     def input_seq(self, frames, taps):
+        # Why the subtracting 0.1?
         mini = frames / (taps - 1) - 0.1
         indices = []
         for i in range(0, taps):
@@ -69,8 +72,8 @@ class HzSimulation:
         return indices
 
     def hertz(self):
-        mini = round(60 * (self.taps - 1) / (self.frames - 1), 2)
-        maxi = round(60 * self.taps / self.frames, 2)
+        mini = round(self.framerate * (self.taps - 1) / (self.frames - 1), 2)
+        maxi = round(self.framerate * self.taps / self.frames, 2)
 
         return (mini, maxi)
 
