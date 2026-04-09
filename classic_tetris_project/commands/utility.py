@@ -47,7 +47,7 @@ class HzCommand(Command):
             raise CommandException("Invalid console type - must be NTSC or PAL (default NTSC)")
         
         try:
-            hz = HzSimulation(level,height,taps,console_type)
+            hz = HzSimulation(level, height, taps, None, console_type)
         except ValueError as e:
             raise CommandException(str(e))
                  
