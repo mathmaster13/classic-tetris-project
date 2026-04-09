@@ -90,11 +90,12 @@ class HzSimulation:
 
     @property
     def filename(self):
-        return "v{version}_l{level}_h{height}_t{taps}.gif".format(
+        return "v{version}_l{level}_h{height}_t{taps}_{console_type}.gif".format(
             version=self.VERSION,
             level=self.level,
             height=self.height,
             taps=self.taps,
+            console_type=self.console_type,
         )
 
     @property
