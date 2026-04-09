@@ -11,6 +11,7 @@ from ..cache import FileCache
 class HzSimulation:
     # VERSION is used for caching images.
     # Increment this every time image generation visibly changes.
+    # TODO does changing the file name of the GIF count?
     VERSION = 2
     IMAGE_CACHE = FileCache("hz")
 
